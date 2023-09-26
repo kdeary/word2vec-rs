@@ -60,13 +60,13 @@ impl Word2vec {
             let s = format!(" {}\n",freq.count);
             try!(file.write(&s.into_bytes()[..]));
 
-            write!(vector_file_writer, "{} ", word.clone()).expect("Couldn't write to vector file");
+            let mut line = String::from(format!("{} ", word.clone()));
 
             for j in (i * self.syn0.row_size)..((i + 1) * self.syn0.row_size) {
-                write!(vector_file_writer, "{} ", &self.syn0.mat[j].to_string()).expect("Couldn't write to vector file");
+                line.push_str(format!("{} ", &self.syn0.mat[j].to_string()).as_str());
             }
 
-            write!(vector_file_writer, "\n").expect("Couldn't write to vector file");
+            writeln!(vector_file_writer, "{}", line.as_str()).expect("Couldn't write to vector file");
         }
         Ok(true)
     }
