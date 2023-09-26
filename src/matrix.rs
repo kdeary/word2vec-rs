@@ -16,7 +16,7 @@ unsafe impl Sync for MatrixWrapper {}
 #[derive(Debug)]
 pub struct Matrix {
     row_size: usize,
-    mat: Vec<f32>,
+    pub mat: Vec<f32>,
 }
 
 impl Matrix {
@@ -109,7 +109,6 @@ impl Matrix {
         n.sqrt()
     }
 
-
     #[inline(always)]
     pub fn get_row(&mut self, i: usize) -> *mut f32 {
         unsafe { self.mat.get_unchecked_mut(i * self.row_size) }
@@ -118,5 +117,4 @@ impl Matrix {
     pub fn get_row_unmod(&self, i: usize) -> *const f32 {
         unsafe { self.mat.get_unchecked(i * self.row_size) }
     }
-
 }
