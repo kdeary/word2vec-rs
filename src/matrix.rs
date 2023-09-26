@@ -15,7 +15,7 @@ unsafe impl Sync for MatrixWrapper {}
 
 #[derive(Debug)]
 pub struct Matrix {
-    row_size: usize,
+    pub row_size: usize,
     pub mat: Vec<f32>,
 }
 

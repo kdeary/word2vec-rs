@@ -62,7 +62,7 @@ impl Word2vec {
 
             write!(vector_file_writer, "{} ", word.clone()).expect("Couldn't write to vector file");
 
-            for j in (i * self.dim)..((i + 1) * self.dim) {
+            for j in (i * self.syn0.row_size)..((i + 1) * self.syn0.row_size) {
                 write!(vector_file_writer, "{} ", &self.syn0.mat[j].to_string()).expect("Couldn't write to vector file");
             }
 
