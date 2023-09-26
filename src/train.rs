@@ -28,7 +28,7 @@ fn print_progress(model: &Model, progress: f32, words: f32, start_time: &SystemT
            progress * 100.,
            ((words * 1000.) /
             (start_time.duration_since(SystemTime::now())
-               .num_milliseconds() as f32)) as u64,
+               .unwrap().as_millis() as f32)) as u64,
            model.get_lr(),
            model.get_loss());
     stdout().flush().unwrap();
@@ -88,7 +88,7 @@ fn train_thread(dict: &Dict,
                 assert_eq!(words, all_tokens);
                 print_progress(&model, progress, words as f32, &start_time);
                 println!("\ntotal train time:{} s",start_time.duration_since(SystemTime::now())
-                        .num_seconds());
+                        .unwrap().as_secs());
                 break;
             }
 
