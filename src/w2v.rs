@@ -40,12 +40,12 @@ impl Word2vec {
     }
     pub fn save_vectors(&self, filename: &str) -> Result<bool, W2vError> {
         let size = self.dict.nsize();
-        let mut file = try!(File::create(filename));
+        let mut file = try!(File::create(filename.to_owned() + ".freq"));
         let mut meta = Vec::new();
         let mut vector_file_writer = Some(OpenOptions::new()
             .write(true)
             .create(true)
-            .open(filename.to_owned() + ".vec")
+            .open(filename.to_owned())
             .expect("Unable to create output file"))
             .unwrap();
 
@@ -68,17 +68,6 @@ impl Word2vec {
 
             write!(vector_file_writer, "\n").expect("Couldn't write to vector file");
         }
-
-        // use std::mem;
-        // use std::slice;
-        // unsafe{
-        //     let mut file = try!(File::create(filename.to_owned()+".vec"));
-        //     let ptr = self.syn0.get_row_unmod(0);
-        //     let ptr = mem::transmute::<*const f32,*const u8>(ptr);
-        //     let u8data = slice::from_raw_parts(ptr,
-        //                                        size*self.dim*4);
-        //     try!(file.write(u8data));
-        // };
         Ok(true)
     }
 
