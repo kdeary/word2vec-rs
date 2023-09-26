@@ -6,7 +6,7 @@ use std::fs::{File, metadata};
 use std::sync::atomic::{AtomicUsize, ATOMIC_USIZE_INIT, Ordering};
 use rand::distributions::{IndependentSample, Range};
 use rand::StdRng;
-use time::SystemTime;
+use std::time::SystemTime;
 use Word2vec;
 use W2vError;
 static ALL_WORDS: AtomicUsize = ATOMIC_USIZE_INIT;
